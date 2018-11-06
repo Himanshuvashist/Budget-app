@@ -3,17 +3,81 @@
 
 var budgetController = (function(){
 
-})();
+    var Income = function(id,description,value){                                                                                   // Function constructor for Income 
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
+    var Expenses = function(id,description,value){                                                                                 // Function constructor for Expenses
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
+
+    var data = {
+        allItems:{
+            exp:[],
+            inc:[],
+        },
+
+        totals:{
+            exp: 0,
+            inc: 0,
+        }
+            };
+
+            return {
+
+                addItem: function(type,des,amt){
+                
+                var newItem, ID;
+
+                if(data.allItems[type].length>0){
+                                //create new id
+                            ID = data.allItems[type][data.allItems[type].length-1].id+1;
+
+                }else {ID = 0}
+                 
+
+                            if (type==="inc"){
+                                newItem = new Income(ID,des,amt);                       
+                            }
+                            else if(type==="exp"){
+                                newItem = new Expenses(ID,des,amt);
+
+                            }
+                            data.allItems[type].push(newItem);
+                            return newItem;
+                            
+
+                
+
+                },
+                testing: function(){console.log(data);},
+
+
+            }
+
+
+
+})();          //------end Budget Controller module
+
+
+
+
 
 // ******UI CONTROLLER MODULE*****
+
 
 var uiController = (function(){
 
     var DOMstrings = {
         get_menu: "#menu",
-        get_discription: "#discription",
+        get_description: "#description",
         get_amount: "#amount",
         get_save_button: "#save_button",
+        get_income:".income_list",
+        get_expenses:".expenses_list"
     };
 
     return{
@@ -21,7 +85,7 @@ var uiController = (function(){
 
             return{
             type : document.querySelector(DOMstrings.get_menu).value,
-            dis :  document.querySelector(DOMstrings.get_discription).value,
+            des :  document.querySelector(DOMstrings.get_description).value,
             amt : document.querySelector(DOMstrings.get_amount).value ,
         }
         },
@@ -30,13 +94,41 @@ var uiController = (function(){
 
             return DOMstrings;
 
-        }
+        },
+
+        addListItem: function(obj,type){
+            var html, newHtml, element;
+            //HTML strings with placeholder text
+            if(type==="inc"){
+                            element=DOMstrings.get_income;
+                            html=`<div class="item boxy" id="income-%id%">
+                                    <div class="middle aligned content">
+                                                            %description%
+                                                                </div>
+                                                                </div>`;
+            }else if (type === "exp"){
+                            element=DOMstrings.get_expenses;
+                            html=`<div class="item boxy" id="expense-%id%">
+                                    <div class="middle aligned content">
+                                                            %description%
+                                                                </div>
+                                                                </div>`;
+            }
+            newHTML = html.replace('%id%',obj.id);
+            newHTML = newHTML.replace('%description%',obj.description);
+            console.log(newHTML);
+
+            document.querySelector(element).insertAdjacentHTML('beforeend',newHTML);
+
+        },
 
             
             
     }
 
-})();
+})();           //------end Ui Controller Module
+
+
 
 // ******GLOBAL APP CONTROLLER MODULE*****
 
@@ -59,15 +151,17 @@ var controller = (function(budgetCtrl,uiCtrl){
     
 
     var ctrlAddItem = function(){
+
+        var input, newItem;
+
         console.log("item has been added.");
-        // get the input date
-
-    
-
-    var input = uiCtrl.getinput();                                                                                        // running publicly aivlable getinput function fron ui controller module
-    console.log(input);
+        // get the input data
+        input = uiCtrl.getinput();                                                                                        // running publicly aivlable getinput function fron ui controller module
+        console.log(input);
         // add item to the budget controller
+        newItem = budgetController.addItem(input.type, input.des,input.amt);  //
         // add item to the UI
+        uiCtrl.addListItem(newItem, input.type);
         // calculate the budget
         // display the budget in the UI
     };
@@ -80,6 +174,9 @@ var controller = (function(budgetCtrl,uiCtrl){
     }
     
 
-})(budgetController,uiController);
+})(budgetController,uiController);              //------end Global App Controller Module
+
+
+
 
 controller.init();                                                                                                      //Telling app to start

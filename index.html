@@ -13,7 +13,7 @@
 <body>
     <div class="ui container">
             <div class="ui grid">
-                    <div class="sixteen wide column blue"><i class="rupee sign icon"></i>1900</div>
+                    <div class="sixteen wide column blue"><i class="rupee sign icon"></i>0</div>
             </div>
             <div class="ui grid">
                     <div class="eight wide column">
@@ -22,7 +22,7 @@
                                       <i class="rupee sign icon"></i> INCOME
                                     </div>
                                     <a class="ui basic green left pointing label">
-                                      2048
+                                      0
                                     </a>
                             </div>
                     </div>
@@ -32,7 +32,7 @@
                                       <i class="rupee sign icon"></i> EXPENSES
                                     </div>
                                     <a class="ui basic red left pointing label">
-                                      148
+                                      0
                                     </a>
                             </div>
                     </div>
@@ -44,8 +44,8 @@
                                     <i class="dropdown icon"></i>
                                     <div class="default text">Select One</div>
                                     <div class="menu">
-                                      <div class="item" data-value="1">+</div>
-                                      <div class="item" data-value="0">-</div>
+                                      <div class="item active selected" data-value="inc">+</div>
+                                      <div class="item" data-value="exp">-</div>
                                     </div>
                             </div>
                     </div>
@@ -54,7 +54,7 @@
                                     <div class="ui label">
                                       Info
                                     </div>
-                                    <input id="discription" type="text" placeholder="Discription...">
+                                    <input id="description" type="text" placeholder="Description...">
                             </div>
 
                     </div>
@@ -81,18 +81,18 @@
                     <div class="ui stackable grid">
                         <div class="eight wide column last">
                             <h1>Income</h1>
-                            <div class="ui divided items boxy">
-                                <!-- <div class="item">
+                            <div class="ui divided items income_list">
+                                <!-- <div class="item boxy" id="income-0">
                                   <div class="middle aligned content">
                                     Content A
                                   </div>
                                 </div>
-                                <div class="item">
+                                <div class="item  boxy" id="income-1">
                                   <div class="middle aligned content">
                                     Content B
                                   </div>
                                 </div>
-                                <div class="item">
+                                <div class="item boxy" id="income-2">
                                   <div class="middle aligned content">
                                     Content C
                                   </div>
@@ -101,18 +101,18 @@
                         </div>
                         <div class="eight wide column last">
                             <h1>Expenses</h1>
-                            <div class="ui divided items boxy">
-                                <!-- <div class="item">
+                            <div class="ui divided items expenses_list">
+                                <!-- <div class="item boxy" id="expense-0">
                                   <div class="middle aligned content">
                                     Content A
                                   </div>
                                 </div>
-                                <div class="item">
+                                <div class="item boxy" id="expense-1">
                                   <div class="middle aligned content">
                                     Content B
                                   </div>
                                 </div>
-                                <div class="item">
+                                <div class="item boxy" id="expense-2">
                                   <div class="middle aligned content">
                                     Content C
                                   </div>
