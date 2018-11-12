@@ -47,6 +47,13 @@ var budgetController = (function(){
 
                             }
                             data.allItems[type].push(newItem);
+
+                            if(data.allItems.inc.length === 1){document.querySelector('.boxy1').style.paddingTop = "15px";
+                                                             document.querySelector('.boxy1').style.paddingBottom = "15px"   }
+                             if (data.allItems.exp.length === 1){document.querySelector('.boxy2').style.paddingTop = "15px";
+                                                                  document.querySelector('.boxy2').style.paddingBottom = "15px";
+
+                            }
                             return newItem;
                             
 
@@ -101,14 +108,14 @@ var uiController = (function(){
             //HTML strings with placeholder text
             if(type==="inc"){
                             element=DOMstrings.get_income;
-                            html=`<div class="item boxy" id="income-%id%">
+                            html=`<div class="item" id="income-%id%">
                                     <div class="middle aligned content">
                                                             %description%
                                                                 </div>
                                                                 </div>`;
             }else if (type === "exp"){
                             element=DOMstrings.get_expenses;
-                            html=`<div class="item boxy" id="expense-%id%">
+                            html=`<div class="item" id="expense-%id%">
                                     <div class="middle aligned content">
                                                             %description%
                                                                 </div>
