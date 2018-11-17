@@ -48,12 +48,12 @@ var budgetController = (function(){
                             }
                             data.allItems[type].push(newItem);
 
-                            if(data.allItems.inc.length === 1){document.querySelector('.boxy1').style.paddingTop = "15px";
-                                                             document.querySelector('.boxy1').style.paddingBottom = "15px"   }
-                             if (data.allItems.exp.length === 1){document.querySelector('.boxy2').style.paddingTop = "15px";
-                                                                  document.querySelector('.boxy2').style.paddingBottom = "15px";
+                            // if(data.allItems.inc.length === 1){document.querySelector('.boxy1').style.paddingTop = "15px";
+                            //                                  document.querySelector('.boxy1').style.paddingBottom = "15px"   }
+                            //  if (data.allItems.exp.length === 1){document.querySelector('.boxy2').style.paddingTop = "15px";
+                            //                                       document.querySelector('.boxy2').style.paddingBottom = "15px";
 
-                            }
+                            // }
                             return newItem;
                             
 
