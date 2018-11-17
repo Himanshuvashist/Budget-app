@@ -60,7 +60,7 @@ var budgetController = (function(){
                 
 
                 },
-                testing: function(){console.log(data);},
+                testing: function(){console.log(data);},  //remove this *****
 
 
             }
@@ -93,7 +93,7 @@ var uiController = (function(){
             return{
             type : document.querySelector(DOMstrings.get_menu).value,
             des :  document.querySelector(DOMstrings.get_description).value,
-            amt : document.querySelector(DOMstrings.get_amount).value ,
+            amt : parseFloat(document.querySelector(DOMstrings.get_amount).value) ,
         }
         },
 
@@ -139,7 +139,7 @@ var uiController = (function(){
             newHTML = html.replace('%id%',obj.id);
             newHTML = newHTML.replace('%description%',obj.description);
             newHTML = newHTML.replace('%value%',obj.value);
-            console.log(newHTML);
+            
 
             document.querySelector(element).insertAdjacentHTML('beforeend',newHTML);
 
@@ -183,24 +183,32 @@ var controller = (function(budgetCtrl,uiCtrl){
     });
     };
 
+    var updateBudget = function (){
+        //calculate the budget
+        //return the budget
+        //display the budget
+    }
+
     
 
     var ctrlAddItem = function(){
 
         var input, newItem;
-
-        console.log("item has been added.");
+        
         // get the input data
-        input = uiCtrl.getinput();                                                                                        // running publicly aivlable getinput function fron ui controller module
-        console.log(input);
-        // add item to the budget controller
-        newItem = budgetController.addItem(input.type, input.des,input.amt);  //
-        // add item to the UI
-        uiCtrl.addListItem(newItem, input.type);
-        // clear the fields
-        uiCtrl.clearFields();
-        // calculate the budget
-        // display the budget in the UI
+        input = uiCtrl.getinput();                                                                            // running publicly aivlable getinput function fron ui controller module
+        
+        if(input.des !=="" && !isNaN(input.amt) && input.amt > 0){
+            
+            // add item to the budget controller
+            newItem = budgetController.addItem(input.type, input.des,input.amt);  
+            // add item to the UI
+            uiCtrl.addListItem(newItem, input.type);
+            // clear the fields
+            uiCtrl.clearFields();
+            // calculate the budget and update budget
+        }
+        
     };
 
     return {
