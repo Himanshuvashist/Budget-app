@@ -108,21 +108,37 @@ var uiController = (function(){
             //HTML strings with placeholder text
             if(type==="inc"){
                             element=DOMstrings.get_income;
-                            html=`<div class="item" id="income-%id%">
-                                    <div class="middle aligned content">
-                                                            %description%
-                                                                </div>
-                                                                </div>`;
+                            
+                            html=`<div class="item boxy ui grid" id="income-%id%">
+                            <div class="eight wide column">
+                               <div class="middle aligned content">
+                               %description%
+                               </div>
+                            </div>
+                            <div class="eight wide column">
+                               <div class="middle aligned content">
+                                +%value%
+                               </div>
+                            </div>
+                        </div>`;                                    
             }else if (type === "exp"){
                             element=DOMstrings.get_expenses;
-                            html=`<div class="item" id="expense-%id%">
-                                    <div class="middle aligned content">
-                                                            %description%
-                                                                </div>
-                                                                </div>`;
+                            html=`<div class="item boxy ui grid" id="income-%id%">
+                            <div class="eight wide column">
+                               <div class="middle aligned content">
+                               %description%
+                               </div>
+                            </div>
+                            <div class="eight wide column">
+                               <div class="middle aligned content">
+                                -%value%
+                               </div>
+                            </div>
+                        </div>`;
             }
             newHTML = html.replace('%id%',obj.id);
             newHTML = newHTML.replace('%description%',obj.description);
+            newHTML = newHTML.replace('%value%',obj.value);
             console.log(newHTML);
 
             document.querySelector(element).insertAdjacentHTML('beforeend',newHTML);
