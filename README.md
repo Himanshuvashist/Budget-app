@@ -5,4 +5,4 @@ This is budget app where you can submit entries of your income and expenses. ver
 
 currently in development state.
 
-Here is [Website](https://github.com/Himanshuvashist/budget-app) link.
+Here is [Website](https://himanshuvashist.github.io/budget-app/) link.
