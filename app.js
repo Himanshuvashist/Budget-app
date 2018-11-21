@@ -14,6 +14,14 @@ var budgetController = (function(){
         this.value = value;
     };
 
+    var calculateTotal = function(type){
+        var sum = 0;
+        data.allItems[type].forEach(function(cur){
+            sum = sum+cur.value;
+        });
+        data.totals[type] = sum;
+    };
+
     var data = {
         allItems:{
             exp:[],
@@ -23,7 +31,8 @@ var budgetController = (function(){
         totals:{
             exp: 0,
             inc: 0,
-        }
+        },
+        budget: 0,
             };
 
             return {
@@ -60,6 +69,29 @@ var budgetController = (function(){
                 
 
                 },
+
+                calculateBudget: function(){
+
+                    //calculate total income and expenses
+                    calculateTotal('exp');
+                    calculateTotal('inc');
+
+
+                    //calculate the budget: income - expenses
+                    data.budget = data.totals.inc - data.totals.exp;
+
+
+                    
+
+                },
+
+                getBudget: function(){
+                    return {
+                        budget: data.budget,
+                        totalInc: data.totals.inc,
+                        totalExp: data.totals.exp,
+                    }
+                },
                 testing: function(){console.log(data);},  //remove this *****
 
 
@@ -84,7 +116,10 @@ var uiController = (function(){
         get_amount: "#amount",
         get_save_button: "#save_button",
         get_income:".income_list",
-        get_expenses:".expenses_list"
+        get_expenses:".expenses_list",
+        get_budgetLabel: "#totalBudget",
+        get_expensesLabel: "#totalExpenses",
+        get_incomeLabel: "#tatalIncome",
     };
 
     return{
@@ -146,7 +181,7 @@ var uiController = (function(){
         },
 
         clearFields: function(){
-            var fields,feildsArr;
+            var fields,fieldsArr;
             fields = document.querySelectorAll(DOMstrings.get_description + ','+ DOMstrings.get_amount);
             fieldsArr = Array.prototype.slice.call(fields);
 
@@ -155,6 +190,13 @@ var uiController = (function(){
             });
 
             fieldsArr[0].focus(); //focus on the discription input 
+        },
+
+        displayBudget: function(obj){
+            document.querySelector(DOMstrings.get_budgetLabel).textContent = obj.budget;
+            document.querySelector(DOMstrings.get_expensesLabel).textContent = obj.totalExp;
+            document.querySelector(DOMstrings.get_incomeLabel).textContent = obj.totalInc; 
+
         },
 
             
@@ -185,9 +227,13 @@ var controller = (function(budgetCtrl,uiCtrl){
 
     var updateBudget = function (){
         //calculate the budget
+        budgetCtrl.calculateBudget();
         //return the budget
+        var budget = budgetCtrl.getBudget();
+
         //display the budget
-    }
+        uiCtrl.displayBudget(budget);
+    };
 
     
 
@@ -207,6 +253,7 @@ var controller = (function(budgetCtrl,uiCtrl){
             // clear the fields
             uiCtrl.clearFields();
             // calculate the budget and update budget
+            updateBudget();
         }
         
     };
