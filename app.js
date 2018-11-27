@@ -144,7 +144,7 @@ var uiController = (function(){
             if(type==="inc"){
                             element=DOMstrings.get_income;
                             
-                            html=`<div class="item boxy ui grid" id="income-%id%">
+                            html=`<div class="item boxy ui grid" id="inc-%id%">
                             <div class="eight wide column">
                                <div class="middle aligned content">
                                %description%
@@ -158,7 +158,7 @@ var uiController = (function(){
                         </div>`;                                    
             }else if (type === "exp"){
                             element=DOMstrings.get_expenses;
-                            html=`<div class="item boxy ui grid" id="income-%id%">
+                            html=`<div class="item boxy ui grid" id="inc-%id%">
                             <div class="eight wide column">
                                <div class="middle aligned content">
                                %description%
